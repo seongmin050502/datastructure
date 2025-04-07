@@ -1,41 +1,18 @@
-class Node:
-    def __init__(self, data, link=None):
-        self.data = data
-        self.link = link
+# print(1+2))
+def is_valid_parentheses(expression : str) -> bool:  # type hint
+    stack = list()
+    for letter in expression:
+        if letter == "(":
+            stack.append(letter)
+        if letter == ")":
+            if len(stack) == 0:
+                return False  # )1+2(), (1+2))
+            else:
+                stack.pop()
+    return len(stack) == 0  # (1+2), ((3*2)/2), ((3*2/2)
 
-class Stack:
-    def __init__(self):
-        self.top = None
-
-
-    def push(self, data):
-        node = Node(data)
-        if self.top is None:
-            self.top = node
-        else:
-            node.link = self.top
-            self.top = node
-
-
-    def pop(self):
-        if self.top is None:
-            return "Stack is empty!"
-        popped_node = self.top
-        self.top = self.top.link
-        popped_node.link = None
-        return popped_node.data
-
-
-    def peek(self):
-        return self.top.data
-
-
-s1 = Stack()
-# print(s1.pop())
-s1.push("Data structure")
-s1.push("Database")
-# print(s1.pop())
-s1.pop()
-print(s1.peek())
-# for i in range(2):
-#     print(s1.pop())
+print(is_valid_parentheses(")1+2()"))
+print(is_valid_parentheses("(1+2))"))
+print(is_valid_parentheses("(1+2)"))
+print(is_valid_parentheses("((3*2)/2)"))
+print(is_valid_parentheses("((3*2/2)"))
